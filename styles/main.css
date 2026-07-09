@@ -1,0 +1,124 @@
+*{
+    padding: 0px;
+    margin: 0px;
+}
+
+body{
+    font-family: Arial, Helvetica, sans-serif;
+}
+.nav-bar{
+    display: flex;
+    height: 50px;
+    background-color: #004F44;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+}
+
+.nav-logo{
+    width: 160px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+.nav-logo:hover {
+  transform: scale(1.05);
+  filter: drop-shadow(0 4px 8px rgba(255, 255, 255, 0.2));
+}
+
+.search-wrapper {
+    display: flex;
+    align-items: center;
+    flex-grow: 1;
+    max-width: 500px;
+    justify-content: center;
+    margin: 0 15px;
+}
+
+.nav-search {
+    width: 100%;
+    height: 40px;
+    min-width: 50px;
+    color: #111111;
+    padding-left: 10px;
+    font-size: 16px;
+    font-weight: 400;
+    border: none;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    font-family: Arial, sans-serif;
+}
+
+.nav-search:focus {
+  outline: none;
+  box-shadow: 0 0 8px rgba(229, 169, 60, 0.4); 
+}
+
+.nav-search::placeholder {
+  font-family: Arial, sans-serif;
+  color: #888888;
+}
+
+.nav-search-button{
+    width: 65px;
+    height: 40px;
+    font-size: 15px;
+    background-color: #E5A93C;
+    border: none;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    padding-left: 0px;
+    cursor: pointer;
+}
+
+.right-section {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    cursor: pointer;
+}
+
+.nav-search-button:hover {
+  background-color: #C78E2B;
+}
+
+.returns-and-orders{
+    color: white;
+    cursor: pointer;
+}
+
+.orders-text{
+    font-weight: bolder;
+}
+
+
+
+.cart-icon {
+    width: 40px;
+    filter: invert(1);
+    transition: transform 0.2s ease;
+    margin: 0;
+}
+
+.cart-icon:hover {
+  transform: scale(1.1);
+}
+
+/* When the screen is 600px wide or smaller */
+@media (max-width: 600px) {
+    .nav-bar {
+        flex-wrap: wrap; /* Allows items to move to a new line */
+        height: auto;    /* Lets the height grow to fit two rows */
+        gap: 10px;       /* Adds spacing between the rows */
+    }
+
+    .search-wrapper {
+        order: 3;        /* Pushes the search bar to the bottom row */
+        max-width: 100%;
+        width: 100%;
+        margin: 0;
+    }
+    
+    .nav-logo {
+        width: 120px;    /* Slightly smaller logo on mobile */
+    }
+}

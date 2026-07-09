@@ -11,7 +11,7 @@ products.forEach(product => {
         <h3 class="product-name" >${product.name}</h3>
         <p class="product-price">${product.price}</p>
         <button class="add-to-cart-button" data-product-id="${product.id}">Add to Cart</button>
-        <select name="quantity" id="quantity-select-${crypto.randomUUID()}" class="product-quantity">
+        <select name="quantity" data-drop-down-id="quantity-select-${crypto.randomUUID()}" class="product-quantity">
             <option value="1">1</option>
             <option value="2">2</option>
             <option value="3">3</option>
@@ -32,11 +32,18 @@ products.forEach(product => {
 const productGrid = document.getElementById("products-grid")
 
 productGrid.addEventListener('click', function(event) {
+    
     if(event.target.classList.contains('add-to-cart-button')){
         const button = event.target;
         const productId = button.dataset.productId;
         const cartValue = document.getElementById('cart-count');
-        cartCount++;
+
+        const prdouctCard = button.closest('.product-card');
+        const getSelect = prdouctCard.querySelector('.product-quantity')
+        const selectValue = getSelect.value;
+
+        cartCount += Number(selectValue);
         cartValue.innerHTML = cartCount;
     }
+    
 })

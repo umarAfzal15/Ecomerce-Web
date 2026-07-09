@@ -154,5 +154,29 @@ export const products = [
         name: "Wow Spray", 
         price: "$22.00", 
         image: "images/wow-spray.webp" 
-    }
+    },
+    {
+    id: 28,
+    name: 'Plush Border Collie Dog',
+    price: '$25.00',
+    image: 'images/61cUIJInYES._AC_SY200_.jpg'
+  },
+  {
+    id: 29,
+    name: 'Spider-Man Action Figure',
+    price: '$18.50',
+    image: 'images/Fuji_Quad_Figure_1x._SY116_CB667159060_.jpg'
+  },
+  {
+    id: 30,
+    name: 'Laptop Cooling Pad Stand',
+    price: '$34.99',
+    image: 'images/Fuji_BTF_Quad_Cards.jpg'
+  },
+  {
+    id: 31,
+    name: 'FIFA World Cup Soccer Ball',
+    price: '$29.95',
+    image: 'images/71BirAZbzXL._AC_SY200_.jpg'
+  }
 ];

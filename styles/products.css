@@ -30,3 +30,55 @@
     font-weight: bold;
     color: #004F44;
 }
+
+.add-to-cart-button{
+    margin-top: 5px;
+    padding: 8px 16px;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #F7CA00;
+    border: 1px solid #F0B800;
+    border-radius: 20px;
+    font-size: 14px;
+    cursor: pointer;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.add-to-cart-button:hover {
+    background-color: #f6b430;
+}
+
+select {
+    padding: 8px 40px 8px 16px;
+}
+
+/* .product-quantity{
+    margin-left: 5px;
+    background-color: #eff1f5;
+    border: 1px solid #dcdcdc;
+    color: #212529;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+} */
+
+.product-quantity {
+    margin-left: 5px;
+    padding: 8px 35px 8px 12px; /* extra space on the right */
+
+    background-color: #eff1f5;
+    color: #212529;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23212529' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+
+    background-repeat: no-repeat;
+    background-position: right 15px center; /* Move arrow left/right here */
+    background-size: 12px;
+}

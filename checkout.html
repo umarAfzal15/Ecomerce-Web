@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="logos/logo_favicon.png">
+    <link rel="stylesheet" href="styles/checkout.css">
+    <link rel="stylesheet" href="styles/checkout-products.css">
+    <title>Checkout</title>
+</head>
+<body>
+    <Header>
+        <div class = "checkout-nav-bar">
+            <a href="index.html">
+                <img src="/logos/logo.png" class="checkout-nav-logo">
+            </a>
+            <div class="checkout-search-wrapper" >
+                <input type="text" class="checkout-nav-search" placeholder="search for products">
+                <button class="checkout-nav-search-button">search</button>
+            </div>
+            <div class="checkout-right-section">
+                <div class="checkout-returns-and-orders">
+                    <p class="checkout-returns-text">Returns</p>
+                    <p class="checkout-orders-text">&amp; Orders</p>
+                </div>
+                <div class="checkout-cart">
+                    <div class="checkout-cart-count" id = "cart-count">0</div>
+                    <a href="checkout.html">
+                        <img src="images/cart-icon.png" alt="Shopping Cart" class="checkout-cart-icon">
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="checkout-container">
+            <div class="checkout-products" id="checkout-products">
+                <div class="checkout-card">
+                    <img src="images/laptop.jpg" alt="laptop">
+                    <div class="checkout-product-details">
+                        <h3 class="checkout-product-name">laptop</h3>
+                        <span> <h4>Quantity: 1</h4></span>
+                        <p class="checkout-product-price">$89.99</p>
+                        <div class="checkout-button-container">
+                            <button class="checkout-delete">Delete</button>
+                            <button class="checkout-minus">-</button>
+                            <button class = "checkout-add">+</button>
+                        </div>
+                    </div>
+                    <div class="checkout-delivery-section">
+
+                        <h3 class="checkout-delivery-heading">Delivery Options</h3>
+                        <div class="checkout-delivery-tabs">
+                            <button type="button" class="checkout-delivery-tab active" data-delivery="standard" data-price="0">
+                                <span>
+                                    <span class="checkout-delivery-tab-title">Standard</span>
+                                    <span class="checkout-delivery-tab-time">3-5 days</span>
+                                </span>
+                                <span class="checkout-delivery-tab-price">Free</span>
+                            </button>
+
+                            <button type="button" class="checkout-delivery-tab" data-delivery="express" data-price="4.99">
+                                <span>
+                                    <span class="checkout-delivery-tab-title">Express</span>
+                                    <span class="checkout-delivery-tab-time">1-2 days</span>
+                                </span>
+                                <span class="checkout-delivery-tab-price">$4.99</span>
+                            </button>
+
+                            <button type="button" class="checkout-delivery-tab" data-delivery="emergency" data-price="12.99">
+                                <span>
+                                    <span class="checkout-delivery-tab-title">Emergency</span>
+                                    <span class="checkout-delivery-tab-time">Today</span>
+                                </span>
+                                <span class="checkout-delivery-tab-price">$12.99</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="place-order-sidebar">
+                <h3 class="checkout-order-summary">Order Summary</h3>
+
+                <div class="checkout-price-details">
+                <h3 class="checkout-price-heading">Price Details</h3>
+
+                <div class="checkout-price-row">
+                    <span class="checkout-price-label">Price (1 item)</span>
+                    <span class="checkout-price-value">$89.99</span>
+                </div>
+
+                <div class="checkout-price-row">
+                    <span class="checkout-price-label">Tax (10%)</span>
+                    <span class="checkout-price-value">$9</span>
+                </div>
+
+                <div class="checkout-price-row">
+                    <span class="checkout-price-label">Delivery Charges</span>
+                    <span class="checkout-price-value checkout-price-free">Free</span>
+                </div>
+
+                <div class="checkout-price-divider"></div>
+
+                <div class="checkout-price-row checkout-total-row">
+                    <span class="checkout-total-label">Total Amount</span>
+                    <span class="checkout-total-value">$98.99</span>
+                </div>
+                </div>  
+
+                <button class= "checkout-place-order">Place Order</button>
+            </div>
+        </div>
+    </main>
+
+    <script type="module" src="scripts/checkout.js"></script>
+
+</body> 
+  

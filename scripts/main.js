@@ -71,7 +71,7 @@ productGrid.addEventListener('click', function(event) {
             JSON.stringify(productInCart)
         );
        //console.log(productInCart)
-       console.log(localStorage.getItem("productInCart"));
+       //console.log(localStorage.getItem("productInCart"));
 
         cartCount += Number(selectValue);
 

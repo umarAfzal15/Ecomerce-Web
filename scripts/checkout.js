@@ -40,11 +40,11 @@ function checkOutRender() {
             <div class="checkout-product-details">
                 <h3 class="checkout-product-name">${product.name}</h3>
                 <span> <h4>Quantity: ${element.quantity}</h4></span>
-                <p class="checkout-product-price">${total.toFixed(2)}</p>
+                <p class="checkout-product-price">$${total.toFixed(2)}</p>
                 <div class="checkout-button-container">
                     <button class="checkout-delete" data-delete-id = "${product.id}">Delete</button>
-                    <button class="checkout-minus">-</button>
-                    <button class = "checkout-add">+</button>
+                    <button class="checkout-minus" data-minus-id = "${product.id}">-</button>
+                    <button class = "checkout-add" data-add-id = "${product.id}">+</button>
                 </div>
             </div>
             <div class="checkout-delivery-section">
@@ -103,7 +103,7 @@ checkoutProduct.addEventListener('click', (event) => {
         updateProduct = updateProduct.filter(item => Number(item.productId) !== idToDelete);
         localStorage.setItem("productInCart", JSON.stringify(updateProduct))
 
-        let updateCartCount = localStorage.getItem("cartCount");
+        let updateCartCount = Number(localStorage.getItem("cartCount")) || 0;
         if (itemToDelete) {
             updateCartCount -= itemToDelete.quantity;
         }
@@ -117,5 +117,67 @@ checkoutProduct.addEventListener('click', (event) => {
         //console.log(updateProduct);
         checkOutRender();
         CartCountRender();
+    }
+
+    if(event.target.classList.contains('checkout-minus')){
+        const idToMinus = Number(event.target.dataset.minusId);
+        let minusProduct = JSON.parse(localStorage.getItem("productInCart"));
+
+        minusProduct.forEach(item => {
+            if(idToMinus === Number(item.productId)){
+                item.quantity -= 1;
+            }
+        });
+
+        const itemToDelete = minusProduct.find(item => Number(item.productId) === idToMinus);
+        minusProduct = minusProduct.filter(item => item.quantity > 0);
+
+        localStorage.setItem("productInCart", JSON.stringify(minusProduct));
+
+        let updateCartCount = Number(localStorage.getItem("cartCount"));
+        if (itemToDelete) {
+            updateCartCount -= 1;
+        }
+        localStorage.setItem("cartCount", updateCartCount);
+
+        checkOutRender();
+        CartCountRender();
+    }
+
+    if(event.target.classList.contains('checkout-add')){
+        const idToAdd = Number(event.target.dataset.addId);
+        let addProduct = JSON.parse(localStorage.getItem("productInCart"));
+
+        addProduct.forEach(item => {
+            if(idToAdd === Number(item.productId)){
+                item.quantity += 1;
+            }
+        });
+
+        const quantityToAdd = addProduct.find(item => Number(item.productId) === idToAdd);
+        //addProduct = addProduct.filter(item => item.quantity > 0);
+
+        localStorage.setItem("productInCart", JSON.stringify(addProduct));
+
+        let updateCartCount = Number(localStorage.getItem("cartCount"));
+        if (quantityToAdd) {
+            updateCartCount += 1;
+        }
+        localStorage.setItem("cartCount", updateCartCount);
+
+        checkOutRender();
+        CartCountRender();
+    }
+
+    const selectOption = event.target.closest('.checkout-delivery-tabs');
+    const clickedTab = event.target.closest('.checkout-delivery-tab');
+
+    if (clickedTab) {
+        selectOption.querySelectorAll('.checkout-delivery-tab').forEach(tab => {
+            tab.classList.remove('active');
+        });
+
+        clickedTab.classList.add('active');
+        //console.log(clickedTab.dataset.delivery); // now works for emergency too
     }
 })

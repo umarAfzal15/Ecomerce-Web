@@ -145,6 +145,12 @@
     background-color: #C78E2B;
 }
 
+.checkout-place-order:active {
+    background-color: #e0a800;
+    transform: scale(0.96);
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
 .checkout-price-details {
     padding: 15px 0;
 }

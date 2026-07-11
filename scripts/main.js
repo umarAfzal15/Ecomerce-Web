@@ -31,7 +31,6 @@ products.forEach(product => {
         </select>
     </div>
     `;
-    //console.log(productHTML);
     productsGrid.innerHTML += productHTML;
 })
 
@@ -48,7 +47,6 @@ productGrid.addEventListener('click', function(event) {
         const getSelect = prdouctCard.querySelector('.product-quantity')
         const selectValue = getSelect.value;
 
-       // console.log("productInCart:", productInCart);
         let productDetail = {
             productId: productId,
             quantity: Number(selectValue)
@@ -70,8 +68,6 @@ productGrid.addEventListener('click', function(event) {
             "productInCart",
             JSON.stringify(productInCart)
         );
-       //console.log(productInCart)
-       //console.log(localStorage.getItem("productInCart"));
 
         cartCount += Number(selectValue);
 

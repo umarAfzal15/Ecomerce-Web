@@ -10,10 +10,8 @@ function CartCountRender () {
 }
 
 CartCountRender();
-//console.log(productInCart);
 
 const checkoutProduct = document.getElementById('checkout-products');
-//console.log(checkoutProductHtml)
 
 function checkOutRender() {
 
@@ -98,25 +96,28 @@ let deliveryPrice = 0;
 let deliverySelections = {};
 checkoutProduct.addEventListener('click', (event) => {
     if(event.target.classList.contains('checkout-delete')){
-        const idToDelete = Number(event.target.dataset.deleteId);
-        //console.log(idToDelete);
-        let updateProduct = JSON.parse(localStorage.getItem('productInCart'));
-        const itemToDelete = updateProduct.find(item => Number(item.productId) === idToDelete);
-        updateProduct = updateProduct.filter(item => Number(item.productId) !== idToDelete);
-        localStorage.setItem("productInCart", JSON.stringify(updateProduct))
+        if(event.target.classList.contains('checkout-delete')){
+            const idToDelete = Number(event.target.dataset.deleteId);
+            let updateProduct = JSON.parse(localStorage.getItem('productInCart'));
+            const itemToDelete = updateProduct.find(item => Number(item.productId) === idToDelete);
+            updateProduct = updateProduct.filter(item => Number(item.productId) !== idToDelete);
+            localStorage.setItem("productInCart", JSON.stringify(updateProduct))
 
-        let updateCartCount = Number(localStorage.getItem("cartCount")) || 0;
-        if (itemToDelete) {
-            updateCartCount -= itemToDelete.quantity;
+            let updateCartCount = Number(localStorage.getItem("cartCount")) || 0;
+            if (itemToDelete) {
+                updateCartCount -= itemToDelete.quantity;
+            }
+            localStorage.setItem("cartCount", updateCartCount);
+
+            delete deliverySelections[idToDelete];
+            const remainingPrices = Object.values(deliverySelections);
+            deliveryPrice = remainingPrices.length > 0 ? Math.max(...remainingPrices) : 0;
+
+            checkOutRender();
+            CartCountRender();
+            renderOrderSummary();
         }
-        //console.log("update", updateCartCount);
-        localStorage.setItem("cartCount", updateCartCount);
-
-        //console.log(localStorage.getItem("cartCount"))
-
-        const updateCartIcon = document.getElementById("cart-count");
         
-        //console.log(updateProduct);
         checkOutRender();
         CartCountRender();
     }
@@ -229,19 +230,24 @@ function renderOrderSummary() {
 
         <div class="checkout-price-row">
             <span class="checkout-price-label">Delivery Charges</span>
-            <span class="checkout-price-value checkout-price-free">${deliveryPriceDisplay}</span>
+            <span class="checkout-price-value checkout-price-free" id = "js-free">${deliveryPriceDisplay}</span>
         </div>
 
         <div class="checkout-price-divider"></div>
 
         <div class="checkout-price-row checkout-total-row">
             <span class="checkout-total-label">Total Amount</span>
-            <span class="checkout-total-value">$${totalAmount}</span>
+            <span class="checkout-total-value" id = "js-total">$${totalAmount}</span>
         </div>
         </div>  
 
         <button class= "checkout-place-order">Place Order</button>
     `;
+
+    if(localStorage.getItem("productInCart") === "[]"){
+        document.getElementById('js-free').innerHTML = "Free";
+        document.getElementById('js-total').innerHTML = "$0.00";
     }
+}
 
 renderOrderSummary();

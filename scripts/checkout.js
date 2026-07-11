@@ -94,6 +94,8 @@ function checkOutRender() {
 
 checkOutRender();
 
+let deliveryPrice = 0;
+let deliverySelections = {};
 checkoutProduct.addEventListener('click', (event) => {
     if(event.target.classList.contains('checkout-delete')){
         const idToDelete = Number(event.target.dataset.deleteId);
@@ -171,13 +173,75 @@ checkoutProduct.addEventListener('click', (event) => {
 
     const selectOption = event.target.closest('.checkout-delivery-tabs');
     const clickedTab = event.target.closest('.checkout-delivery-tab');
-
     if (clickedTab) {
         selectOption.querySelectorAll('.checkout-delivery-tab').forEach(tab => {
             tab.classList.remove('active');
         });
 
         clickedTab.classList.add('active');
-        //console.log(clickedTab.dataset.delivery); // now works for emergency too
+
+        const productCard = clickedTab.closest('.checkout-card');
+        const productId = productCard.querySelector('.checkout-delete').dataset.deleteId;
+
+        deliverySelections[productId] = Number(clickedTab.dataset.price);
+        deliveryPrice = Math.max(...Object.values(deliverySelections));
     }
+    renderOrderSummary();
 })
+
+function renderOrderSummary() {
+    const OrderSection = document.getElementById('place-order-sidebar');
+    const items = JSON.parse(localStorage.getItem("productInCart")) || [];
+
+    let quantity = 0;
+    let subTotalAmount = 0;
+
+    items.forEach(element => {
+        quantity += Number(element.quantity);
+        products.forEach(item => {
+            if (item.id === Number(element.productId)) {
+                const price = parseFloat(String(item.price).replace(/[^0-9.]/g, ""));
+                subTotalAmount += price * Number(element.quantity);
+            }
+        });
+    });
+
+    const taxMoney = ((10 / 100) * subTotalAmount).toFixed(2);
+    const numericDeliveryPrice = Number(deliveryPrice) || 0;
+    const totalAmount = (subTotalAmount + numericDeliveryPrice).toFixed(2);
+    const deliveryPriceDisplay = numericDeliveryPrice === 0 ? "Free" : `$${numericDeliveryPrice.toFixed(2)}`;
+
+    OrderSection.innerHTML = `
+    <h3 class="checkout-order-summary">Order Summary</h3>
+
+        <div class="checkout-price-details">
+        <h3 class="checkout-price-heading">Price Details</h3>
+
+        <div class="checkout-price-row">
+            <span class="checkout-price-label">Price (${quantity} item${quantity !== 1 ? 's' : ''})</span>
+            <span class="checkout-price-value">$${subTotalAmount.toFixed(2)}</span>
+        </div>
+
+        <div class="checkout-price-row">
+            <span class="checkout-price-label">Tax (10%)</span>
+            <span class="checkout-price-value">$${taxMoney}</span>
+        </div>
+
+        <div class="checkout-price-row">
+            <span class="checkout-price-label">Delivery Charges</span>
+            <span class="checkout-price-value checkout-price-free">${deliveryPriceDisplay}</span>
+        </div>
+
+        <div class="checkout-price-divider"></div>
+
+        <div class="checkout-price-row checkout-total-row">
+            <span class="checkout-total-label">Total Amount</span>
+            <span class="checkout-total-value">$${totalAmount}</span>
+        </div>
+        </div>  
+
+        <button class= "checkout-place-order">Place Order</button>
+    `;
+    }
+
+renderOrderSummary();

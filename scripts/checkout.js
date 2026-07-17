@@ -209,9 +209,9 @@ function renderOrderSummary() {
 
     const taxMoney = ((10 / 100) * subTotalAmount).toFixed(2);
     const numericDeliveryPrice = Number(deliveryPrice) || 0;
-    const totalAmount = (subTotalAmount + numericDeliveryPrice).toFixed(2);
+    const totalAmount =  (subTotalAmount + numericDeliveryPrice + Number(taxMoney)).toFixed(2);
     const deliveryPriceDisplay = numericDeliveryPrice === 0 ? "Free" : `$${numericDeliveryPrice.toFixed(2)}`;
-
+    
     OrderSection.innerHTML = `
     <h3 class="checkout-order-summary">Order Summary</h3>
 
